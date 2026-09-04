@@ -1,0 +1,98 @@
+{
+  "node": "cmo",
+  "intro": "The top of the loop. Ten minutes. This file decides who is allowed to decide what — including which decisions an agent gets to make alone.",
+  "sections": [
+    {
+      "section": "Objective and constraints",
+      "ask": [
+        {
+          "id": "objective",
+          "q": "The objective this quarter — a number and a date.",
+          "type": "short",
+          "example": "$4.2M revenue by Dec 31 at or under $58 blended CAC"
+        },
+        {
+          "id": "budget",
+          "q": "Budget ceiling.",
+          "type": "short"
+        },
+        {
+          "id": "headcount_human",
+          "q": "How many humans?",
+          "type": "short"
+        },
+        {
+          "id": "headcount_agent",
+          "q": "How many agents, and what are they?",
+          "type": "text"
+        },
+        {
+          "id": "wont_do",
+          "q": "What will you not do to hit the number?",
+          "help": "The question that makes this file worth writing. If there's no answer, the number owns you.",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Org chart: humans and agents",
+      "ask": [
+        {
+          "id": "staffing",
+          "q": "For each node, name the accountable human and the agent.",
+          "help": "\"Agent-first\" still means a named human reads the output. A node with no name on it is the first place this breaks.",
+          "type": "table",
+          "columns": ["Node", "Mode", "Human accountable", "Agent"],
+          "rows": 10,
+          "prefill": "org_chart"
+        }
+      ]
+    },
+    {
+      "section": "Decision rights and escalation",
+      "ask": [
+        {
+          "id": "tier1",
+          "q": "What can an agent decide on its own, reviewed after the fact?",
+          "type": "text"
+        },
+        {
+          "id": "tier2",
+          "q": "What must an agent propose and a human approve before it ships?",
+          "help": "Anything with the brand name on it, any spend change, any offer — at minimum.",
+          "type": "text"
+        },
+        {
+          "id": "tier3",
+          "q": "What does a human decide outright, with the agent only supporting?",
+          "type": "text"
+        },
+        {
+          "id": "escalation",
+          "q": "What must make an agent stop and escalate?",
+          "help": "Write triggers, not principles. \"Spend variance over 15%\" escalates; \"use good judgment\" does not.",
+          "type": "list",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "section": "Weekly review cadence",
+      "ask": [
+        {
+          "id": "cadence",
+          "q": "Who does what, and when?",
+          "type": "table",
+          "columns": ["When", "What", "Who"],
+          "rows": 4
+        },
+        {
+          "id": "rollup_owner",
+          "q": "Who writes the \"what it means\" paragraph on the weekly rollup?",
+          "help": "An agent can draft the numbers. Someone has to say what they mean and sign it.",
+          "type": "short"
+        }
+      ]
+    }
+  ]
+}

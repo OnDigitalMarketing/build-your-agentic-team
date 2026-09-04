@@ -130,6 +130,59 @@ for (const path of walk(ROOT)) {
   };
 }
 
+/* ---------- interviews ---------- */
+
+// interview/<node>.json turns a node file into a guided set of questions. Each
+// question hangs off a section, and that section has to be a real "## " heading
+// in the node's markdown — same no-drift rule as everything else here.
+const interviews = {};
+const INTERVIEW_DIR = join(ROOT, "interview");
+
+let interviewFiles = [];
+try {
+  interviewFiles = readdirSync(INTERVIEW_DIR).filter((f) => f.endsWith(".json"));
+} catch {
+  // No interviews yet; the diagram still builds.
+}
+
+for (const file of interviewFiles) {
+  const rel = `/interview/${file}`;
+  let data;
+  try {
+    data = JSON.parse(readFileSync(join(INTERVIEW_DIR, file), "utf8"));
+  } catch (err) {
+    errors.push(`${rel}: not valid JSON — ${err.message}`);
+    continue;
+  }
+
+  const id = data.node;
+  if (!nodes[id]) {
+    errors.push(`${rel}: no markdown file declares node "${id}"`);
+    continue;
+  }
+
+  const headings = nodes[id].sections;
+  const ids = new Set();
+
+  for (const section of data.sections ?? []) {
+    if (!headings.includes(section.section)) {
+      errors.push(`${rel}: asks about "${section.section}", which isn't a section of ${nodes[id].file}`);
+    }
+    for (const ask of section.ask ?? []) {
+      if (ids.has(ask.id)) errors.push(`${rel}: duplicate question id "${ask.id}"`);
+      ids.add(ask.id);
+    }
+  }
+
+  interviews[id] = data;
+}
+
+for (const id of Object.keys(nodes)) {
+  if (!interviews[id] && !["loop", "open"].includes(id)) {
+    warnings.push(`node "${id}" has no interview/${id}.json yet`);
+  }
+}
+
 /* ---------- reconcile against the design file ---------- */
 
 const design = readFileSync(DESIGN, "utf8");
@@ -159,8 +212,9 @@ if (errors.length) {
 }
 
 const count = Object.keys(nodes).length;
+const interviewCount = Object.keys(interviews).length;
 if (CHECK_ONLY) {
-  console.log(`✓ ${count} nodes, no drift between the markdown and the diagram.`);
+  console.log(`✓ ${count} nodes, ${interviewCount} interviews, no drift.`);
   process.exit(0);
 }
 
@@ -180,6 +234,9 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 writeFileSync(join(OUT, "index.html"), injected);
+// The app layer reads this instead of parsing markdown at runtime. Portable as-is
+// to a Next.js route or a Supabase sync job.
+writeFileSync(join(OUT, "nodes.json"), JSON.stringify({ nodes, interviews }, null, 2));
 cpSync(join(ROOT, "design", "support.js"), join(OUT, "support.js"));
 cpSync(join(ROOT, "design", "_ds"), join(OUT, "_ds"), { recursive: true });
 writeFileSync(join(OUT, ".nojekyll"), ""); // stop Pages from eating the _ds directory

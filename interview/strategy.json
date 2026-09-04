@@ -1,0 +1,139 @@
+{
+  "node": "strategy",
+  "intro": "The file everything else inherits from. Twelve questions, about twenty minutes. Answer as if an agent will act on it — because one will.",
+  "sections": [
+    {
+      "section": "Positioning and the promise",
+      "ask": [
+        {
+          "id": "for_who",
+          "q": "Who is this for?",
+          "help": "Specific enough that an agent could disqualify someone. \"Mid-market\" is not a segment; a revenue band and a trigger is.",
+          "type": "text",
+          "example": "Home cooks who already buy organic and have started reading past the label"
+        },
+        {
+          "id": "their_problem",
+          "q": "What do they suspect or struggle with that you can name better than they can?",
+          "type": "text",
+          "example": "They suspect \"organic\" stopped meaning much and can't tell which brands actually farm differently"
+        },
+        {
+          "id": "category",
+          "q": "What category are you in, in their words?",
+          "help": "The shelf they'd look on. Not the category you wish existed.",
+          "type": "short"
+        },
+        {
+          "id": "promise",
+          "q": "The promise, in one sentence.",
+          "help": "One sentence. If it needs an \"and,\" you have two brands.",
+          "type": "text"
+        },
+        {
+          "id": "unlike",
+          "q": "Unlike whom — and what do you do that they don't?",
+          "type": "text"
+        },
+        {
+          "id": "proof",
+          "q": "Three proofs you can actually keep the promise.",
+          "help": "Things a skeptic could verify. A number, a document, a name. Not adjectives.",
+          "type": "list",
+          "count": 3
+        },
+        {
+          "id": "positioning_cost",
+          "q": "What does this positioning cost you?",
+          "help": "Every real position closes a door. Naming it here is what stops someone reopening it next quarter.",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Voice and tone — human owned",
+      "ask": [
+        {
+          "id": "sounds_like",
+          "q": "We sound like…",
+          "help": "A person in a situation, not a list of adjectives.",
+          "type": "text",
+          "example": "A farmer explaining something to a neighbor who asked a good question"
+        },
+        {
+          "id": "never_sounds_like",
+          "q": "We never sound like…",
+          "help": "Name the category default you're refusing. Include specific banned words.",
+          "type": "text"
+        },
+        {
+          "id": "say_dont_say",
+          "q": "Five pairs: what we'd say, and the version we wouldn't.",
+          "help": "The most useful thing in the file. This is a classifier an agent can run a draft against.",
+          "type": "pairs",
+          "count": 5,
+          "labels": ["We say", "We don't say"]
+        },
+        {
+          "id": "tone_bad_news",
+          "q": "How do you sound when the news is bad?",
+          "help": "Stockout, price increase, outage. Most brands have no answer and default to chirpy.",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Look and feel, visual standards",
+      "ask": [
+        {
+          "id": "visual_rules",
+          "q": "Color, type, and photography rules.",
+          "type": "text"
+        },
+        {
+          "id": "wrong_asset",
+          "q": "Describe an asset that looks wrong.",
+          "help": "Be concrete. This is how an agent knows it reached for the category default instead of your library.",
+          "type": "text",
+          "example": "Kraft paper texture, hand-lettered script, a mason jar, sunlight flare through a wheat field"
+        }
+      ]
+    },
+    {
+      "section": "Competitive analysis and where you win",
+      "ask": [
+        {
+          "id": "competitors",
+          "q": "Your three or four real competitors — their claim, their strength, and where you win.",
+          "type": "table",
+          "columns": ["Competitor", "Their claim", "Where they're strong", "Where we win"],
+          "rows": 4
+        },
+        {
+          "id": "the_gap",
+          "q": "What gap are you claiming that nobody else has?",
+          "type": "text"
+        },
+        {
+          "id": "genuinely_weak",
+          "q": "Where are you genuinely weak?",
+          "help": "An agent that doesn't know this will write copy that pretends otherwise.",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "What this brand will not do",
+      "ask": [
+        {
+          "id": "will_not",
+          "q": "List the things this brand will not do.",
+          "help": "The section agents need most. Write each one so a draft can be checked against it without asking a human. Aim for six or more.",
+          "type": "list",
+          "count": 6,
+          "example": "We will not discount below 10%, ever, and never sitewide."
+        }
+      ]
+    }
+  ]
+}
