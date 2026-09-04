@@ -17,7 +17,9 @@ const DESIGN = join(ROOT, "design", "agentic-marketing-system.dc.html");
 const OUT = join(ROOT, "site");
 const CHECK_ONLY = process.argv.includes("--check");
 
-const SKIP_DIRS = new Set(["node_modules", ".git", "site", "design", ".github"]);
+// `examples/` holds filled-in reference copies of node files. They deliberately
+// reuse the same frontmatter, so they're skipped to avoid duplicate node ids.
+const SKIP_DIRS = new Set(["node_modules", ".git", "site", "design", ".github", "examples"]);
 
 const errors = [];
 const warnings = [];

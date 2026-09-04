@@ -86,6 +86,15 @@ down.
 4. **An agent operating outside its guardrails without escalating.** That's a
    file problem, not a model problem — the rule wasn't written testably.
 
+## What "filled in" looks like
+
+The node files ship blank on purpose. [`examples/wildrye/strategy.md`](examples/wildrye/strategy.md)
+is one of them written out in full, for a fictional DTC pantry brand — including
+the "what this brand will not do" section that does most of the actual work.
+
+A node file is finished when an agent could act on it and be wrong in a way
+you'd catch.
+
 ## Working in this repo
 
 Every file has YAML frontmatter that the diagram reads. Edit the markdown, and
