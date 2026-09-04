@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-7bf99d91-4967-4a29-a890-9189a315615e/styles.css">
+<script src="_ds/modernist-7bf99d91-4967-4a29-a890-9189a315615e/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap">
+<style>
+body { margin: 0; background: #ffffff; }
+a { color: #A41034; text-underline-offset: 3px; }
+a:hover { color: #78244C; }
+button:focus-visible, [role="button"]:focus-visible { outline: 2px solid #A41034; outline-offset: 2px; }
+@keyframes loopFlash {
+  0%, 100% { filter: none; }
+  12% { filter: hue-rotate(-60deg) saturate(2.4) brightness(1.15) drop-shadow(0 0 7px rgba(230,120,20,0.55)); }
+  38% { filter: hue-rotate(160deg) saturate(2.2) brightness(1.1) drop-shadow(0 0 11px rgba(0,140,180,0.55)); }
+  64% { filter: hue-rotate(-60deg) saturate(2.4) brightness(1.15) drop-shadow(0 0 7px rgba(230,120,20,0.5)); }
+  86% { filter: saturate(1.6) brightness(1.05) drop-shadow(0 0 6px rgba(164,16,52,0.5)); }
+}
+</style>
+</helmet>
+
+<div style="--color-bg: #ffffff; --color-text: #000000; --color-surface: #ffffff; --color-divider: #68666F; --color-accent: #A41034; --color-accent-100: #f7eaee; --color-accent-200: #eed3da; --color-accent-700: #78244C; width: 1440px; height: 740px; box-sizing: border-box; padding: 14px 24px 12px; background: #ffffff; color: var(--color-text); font-family: var(--font-body); display: flex; flex-direction: column;">
+
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; border-bottom: 2px solid var(--color-divider); padding-bottom: 9px; flex: none;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <h1 style="margin: 0; font-size: 24px; letter-spacing: -0.02em;">Build Your Agentic Team</h1>
+      <div style="font-size: 12px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 60%, transparent); max-width: 420px;">One self-feeding loop. Campaigns get and keep customers; customers fund the next campaign.</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 6px; flex: none;">
+        <button onClick="{{ onPrev }}" title="Back a step" style="border: 2px solid var(--color-text); background: #ffffff; color: var(--color-text); font-family: var(--font-heading); font-weight: 600; font-size: 13px; line-height: 1; padding: 0 10px; height: 28px; min-width: 28px; cursor: pointer;">&lsaquo;</button>
+        <button onClick="{{ onNext }}" title="Next step" style="border: 2px solid var(--color-accent); background: var(--color-accent); color: #ffffff; font-family: var(--font-heading); font-weight: 600; font-size: 13px; line-height: 1; padding: 0 10px; height: 28px; min-width: 28px; cursor: pointer;">&rsaquo;</button>
+        <button onClick="{{ onPlay }}" title="Play or pause the walkthrough" style="border: 2px solid var(--color-text); background: #ffffff; color: var(--color-text); font-family: var(--font-heading); font-weight: 600; font-size: 12px; line-height: 1; padding: 0 10px; height: 28px; min-width: 28px; cursor: pointer;">{{ playLabel }}</button>
+        <button onClick="{{ onReset }}" title="Show the whole system" style="border: 2px solid var(--color-text); background: #ffffff; color: var(--color-text); font-family: var(--font-heading); font-weight: 600; font-size: 13px; line-height: 1; padding: 0 10px; height: 28px; min-width: 28px; cursor: pointer;">Show all</button>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid #D5D0CA; padding: 7px 0; flex: none;">
+    <div style="font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent); white-space: nowrap;">{{ stepCounter }}</div>
+    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; letter-spacing: -0.01em;">{{ stepCaption }}</div>
+  </div>
+
+  <div style="display: flex; gap: 24px; padding-top: 12px; flex: 1; min-height: 0;">
+
+    <div style="width: 799px; height: 595px; flex: none;">
+    <div style="position: relative; width: 940px; height: 700px; transform: scale(0.85); transform-origin: top left;">
+
+      <div style="{{ dLoop }}">
+        <svg width="940" height="700" viewBox="0 0 940 700" style="position: absolute; inset: 0;">
+          <g fill="none" stroke="var(--color-accent)" stroke-width="1">
+            <rect x="8" y="8" width="924" height="676"></rect>
+          </g>
+          <g fill="var(--color-accent)">
+            <polygon points="700,8 683,1 683,15"></polygon>
+            <polygon points="932,420 925,403 939,403"></polygon>
+            <polygon points="240,684 257,691 257,677"></polygon>
+            <polygon points="8,300 15,317 1,317"></polygon>
+          </g>
+        </svg>
+        <div style="position: absolute; left: 34px; top: 1px;">
+          <span style="background: #ffffff; padding: 0 10px 0 0; font-family: var(--font-heading); font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent);">The loop feeds itself</span>
+        </div>
+        <div style="position: absolute; left: 280px; top: 1px; width: 380px; text-align: center;">
+          <span style="background: #ffffff; padding: 0 12px; font-family: var(--font-heading); font-weight: 600; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Campaigns get &amp; keep customers</span>
+        </div>
+        <div style="position: absolute; left: 280px; top: 677px; width: 380px; text-align: center;">
+          <span style="background: #ffffff; padding: 0 12px; font-family: var(--font-heading); font-weight: 600; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Customers fund the next campaign</span>
+        </div>
+      </div>
+
+      <div style="{{ dWires }}">
+        <svg width="940" height="700" viewBox="0 0 940 700" style="position: absolute; inset: 0;">
+          <g fill="none" stroke="#C9C4BE" stroke-width="1">
+            <path d="M470 82 V108"></path>
+            <path d="M470 170 V186"></path>
+            <path d="M193 186 H625"></path>
+            <path d="M193 186 V196"></path>
+            <path d="M625 186 V196"></path>
+            <path d="M193 302 V322"></path>
+            <path d="M118 322 H268"></path>
+            <path d="M118 322 V338"></path>
+            <path d="M268 322 V338"></path>
+            <path d="M625 302 V322"></path>
+            <path d="M421 322 H829"></path>
+            <path d="M421 322 V338"></path>
+            <path d="M557 322 V338"></path>
+            <path d="M693 322 V338"></path>
+            <path d="M829 322 V338"></path>
+          </g>
+        </svg>
+      </div>
+
+      <div style="{{ dCmo }}">
+        <div role="button" tabIndex="0" onClick="{{ onCmo }}" style="position: absolute; left: 385px; top: 36px; width: 170px; height: 46px; box-sizing: border-box; border: 2px solid var(--color-accent); background: #ffffff; padding: 0 12px; display: flex; flex-direction: column; justify-content: center; gap: 2px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="background: #F7F6F5;">
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; line-height: 1; color: var(--color-accent-700);">CMO</div>
+          <div style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Human + agent — you</div>
+        </div>
+      </div>
+
+      <div style="{{ dStrategy }}">
+        <div role="button" tabIndex="0" onClick="{{ onStrategy }}" style="position: absolute; left: 290px; top: 108px; width: 360px; height: 62px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-surface); padding: 9px 14px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="background: #F7F6F5;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent — sets the brief below</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; line-height: 1;">Strategy &amp; Brand</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">/strategy.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dCustomers }}">
+        <div role="button" tabIndex="0" onClick="{{ onCustomers }}" style="position: absolute; left: 48px; top: 196px; width: 290px; height: 66px; box-sizing: border-box; border: 1.5px solid var(--color-text); background: var(--color-surface); padding: 9px 14px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 21px; line-height: 1;">Ideal Customers</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">/customers/icp.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dCampaigns }}">
+        <div role="button" tabIndex="0" onClick="{{ onCampaigns }}" style="position: absolute; left: 358px; top: 196px; width: 534px; height: 66px; box-sizing: border-box; border: 1.5px solid var(--color-text); background: var(--color-surface); padding: 9px 14px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 21px; line-height: 1;">Campaigns</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">/campaigns/plan.md</div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showEquations }}" hint-placeholder-val="{{ true }}">
+        <div style="{{ dEq1 }}">
+          <div style="position: absolute; left: 48px; top: 262px; width: 290px; height: 40px; box-sizing: border-box; border: 1.5px solid #006085; border-top: 0; background: #eaf2f5; padding: 0 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: #006085; flex: none;">Eq 1</span>
+            <span style="font-family: var(--font-heading); font-weight: 800; font-size: 12px; line-height: 1.1; white-space: nowrap; color: #00485f;">LTV &minus; CAC = Post-Acquisition Value</span>
+          </div>
+        </div>
+        <div style="{{ dEq2 }}">
+          <div style="position: absolute; left: 358px; top: 262px; width: 534px; height: 40px; box-sizing: border-box; border: 1.5px solid #006085; border-top: 0; background: #eaf2f5; padding: 0 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: #006085; flex: none;">Eq 2</span>
+            <span style="font-family: var(--font-heading); font-weight: 800; font-size: 13px; line-height: 1.1; white-space: nowrap; color: #00485f;">Sessions &times; Conversion Rate &times; Average Order Value = Revenue</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="{{ dAcquisition }}">
+        <div role="button" tabIndex="0" onClick="{{ onAcquisition }}" style="position: absolute; left: 48px; top: 338px; width: 140px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: transparent; flex: none;"></span>Agent-first</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1;">Acquisition</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">customers/<br>acquisition.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dRetention }}">
+        <div role="button" tabIndex="0" onClick="{{ onRetention }}" style="position: absolute; left: 198px; top: 338px; width: 140px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1;">Retention</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">customers/<br>retention.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dSeo }}">
+        <div role="button" tabIndex="0" onClick="{{ onSeo }}" style="position: absolute; left: 358px; top: 338px; width: 126px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: transparent; flex: none;"></span>Agent-first</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1;">SEO / GEO</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">campaigns/<br>seo-geo.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dPaid }}">
+        <div role="button" tabIndex="0" onClick="{{ onPaid }}" style="position: absolute; left: 494px; top: 338px; width: 126px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1;">Paid Ads</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">campaigns/<br>paid-ads.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dInfluencer }}">
+        <div role="button" tabIndex="0" onClick="{{ onInfluencer }}" style="position: absolute; left: 630px; top: 338px; width: 126px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1;">Influencer</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">campaigns/<br>influencer.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dOwned }}">
+        <div role="button" tabIndex="0" onClick="{{ onOwned }}" style="position: absolute; left: 766px; top: 338px; width: 126px; height: 92px; box-sizing: border-box; border: 1px solid #D5D0CA; background: #F7F6F5; padding: 10px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #68666F;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 13.5px; line-height: 1.1; white-space: nowrap;">Owned Media</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; line-height: 1.4; color: color-mix(in srgb, var(--color-text) 58%, transparent);">campaigns/<br>owned-media.md</div>
+        </div>
+      </div>
+
+      <div style="{{ dOpen }}">
+        <div style="position: absolute; left: 48px; top: 452px; width: 844px; border-top: 1px dashed #A3A0A2; padding-top: 6px; display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">
+          <span>Additional agents — your judgement goes here</span><span>Add as many as your loop needs. Name it. Staff it. Write its file.</span>
+        </div>
+        <div role="button" tabIndex="0" onClick="{{ onOpen }}" style="position: absolute; left: 48px; top: 486px; width: 270px; height: 80px; box-sizing: border-box; border: 1px dashed #A3A0A2; background: transparent; padding: 9px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Open slot</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Your judgement goes here</div>
+          <div style="font-size: 10px; line-height: 1.3; color: color-mix(in srgb, var(--color-text) 45%, transparent);">What function is missing from this loop?</div>
+        </div>
+        <div role="button" tabIndex="0" onClick="{{ onOpen }}" style="position: absolute; left: 335px; top: 486px; width: 270px; height: 80px; box-sizing: border-box; border: 1px dashed #A3A0A2; background: transparent; padding: 9px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Open slot</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Your judgement goes here</div>
+          <div style="font-size: 10px; line-height: 1.3; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Human, agent, or both — and defend it.</div>
+        </div>
+        <div role="button" tabIndex="0" onClick="{{ onOpen }}" style="position: absolute; left: 622px; top: 486px; width: 270px; height: 80px; box-sizing: border-box; border: 1px dashed #A3A0A2; background: transparent; padding: 9px 11px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="border-color: var(--color-accent); background: #ffffff; box-shadow: 0 0 0 3px #F2EDEE;">
+          <div style="font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Open slot</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 15px; line-height: 1.1; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Your judgement goes here</div>
+          <div style="font-size: 10px; line-height: 1.3; color: color-mix(in srgb, var(--color-text) 45%, transparent);">What is possible now that was not last year?</div>
+        </div>
+        <div style="position: absolute; left: 48px; top: 574px; width: 844px; text-align: center; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 40%, transparent);">+ however many more the loop needs</div>
+      </div>
+
+      <div style="{{ dAnalytics }}">
+        <svg width="940" height="700" viewBox="0 0 940 700" style="position: absolute; inset: 0; pointer-events: none;">
+          <g fill="none" stroke="#A3A0A2" stroke-width="1" stroke-dasharray="5 5">
+            <path d="M118 430 V440 H26 V628 H282"></path>
+            <path d="M829 430 V440 H914 V628 H658"></path>
+          </g>
+          <g fill="#A3A0A2">
+            <polygon points="290,628 280,622 280,634"></polygon>
+            <polygon points="650,628 660,622 660,634"></polygon>
+          </g>
+        </svg>
+        <div style="position: absolute; left: 44px; top: 620px; background: #ffffff; padding: 0 7px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Customer data back</div>
+        <div style="position: absolute; left: 686px; top: 620px; background: #ffffff; padding: 0 7px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent);">Campaign data back</div>
+        <div role="button" tabIndex="0" onClick="{{ onAnalytics }}" style="position: absolute; left: 290px; top: 596px; width: 360px; height: 64px; box-sizing: border-box; border: 1.5px solid #006085; background: #eaf2f5; padding: 9px 14px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; outline: var(--sel, 0px solid transparent); outline-offset: 2px;" style-hover="background: #d8e7ed; border-color: #00485f;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #006085;"><span style="width: 8px; height: 8px; box-sizing: border-box; border: 1.5px solid var(--color-accent); background: var(--color-accent); flex: none;"></span>Human + agent — scores both equations</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; line-height: 1; color: #00485f;">Analytics</div>
+          <div style="font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">/analytics.md</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+    <div style="border-left: 1px solid #D5D0CA; padding-left: 24px; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 13px;">
+      <div style="display: flex; flex-direction: column; gap: 7px;">
+        <div style="font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Click any node</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent);">
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; background: var(--color-accent); flex: none;"></span>Human + agent</div>
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; box-sizing: border-box; border: 2px solid var(--color-accent); flex: none;"></span>Agent-first — still reviewed</div>
+          <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; background: #006085; flex: none;"></span>The number it moves</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-700);">{{ sel.kind }}</div>
+        <h2 style="margin: 0; font-size: 25px; letter-spacing: -0.02em;">{{ sel.title }}</h2>
+      </div>
+      <div style="font-size: 13.5px; line-height: 1.5; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 78%, transparent);">{{ sel.body }}</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; border-top: 1px solid #D5D0CA; padding-top: 11px;">
+        <div style="font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Owns this file</div>
+        <div style="font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: var(--color-surface); border: 1px solid var(--color-divider); padding: 7px 9px;">{{ sel.file }}</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <div style="font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Sections in the file</div>
+        <sc-for list="{{ sel.sections }}" as="line" hint-placeholder-count="4">
+          <div style="display: flex; gap: 8px; font-size: 12.5px; line-height: 1.4; padding: 4px 0; border-bottom: 1px solid #E8E5E1;">
+            <span style="font-family: ui-monospace, Menlo, monospace; color: var(--color-accent); flex: none;">##</span>
+            <span>{{ line }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top: auto; border-top: 1.5px solid var(--color-accent); padding-top: 9px; font-size: 12px; line-height: 1.45; color: color-mix(in srgb, var(--color-text) 72%, transparent);">{{ sel.metric }}</div>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; border-top: 1px solid #D5D0CA; margin-top: 12px; padding-top: 8px; flex: none; font-size: 10px; letter-spacing: 0.04em; color: color-mix(in srgb, var(--color-text) 55%, transparent);">
+    <sc-if value="{{ showRepoStrip }}" hint-placeholder-val="{{ true }}">
+      <div><b style="color: var(--color-accent);">Repo</b> every function is a markdown file &nbsp;·&nbsp; <b style="color: var(--color-accent);">Commit</b> strategy is a reviewed edit, not slides &nbsp;·&nbsp; <b style="color: var(--color-accent);">Delegate</b> each agent reads its own file plus the two it depends on &nbsp;·&nbsp; <b style="color: var(--color-accent);">Measure</b> the two equations are the tests</div>
+    </sc-if>
+    <div style="flex: none;">Build Your Agentic Team&trade; &nbsp;·&nbsp; &copy; 2026 On Digital Marketing LLC. All rights reserved.</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;showEquations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showRepoStrip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const NODES = {
+  cmo: {
+    kind: "Human + agent — you",
+    title: "CMO",
+    body: "You own the loop, not the tasks. Set the objective, decide which agent gets which mandate, and approve anything that changes an equation. Your own seat is a hybrid: an agent drafts the plan and the rollup, you make the call.",
+    file: "/CMO.md",
+    sections: ["Objective and constraints", "Org chart: humans and agents", "Decision rights and escalation", "Weekly review cadence"],
+    metric: "Reviewed weekly. Everything below inherits from this file."
+  },
+  strategy: {
+    kind: "Human + agent — sets the brief for everything below",
+    title: "Strategy & Brand",
+    body: "Sits directly under the CMO because everything downstream inherits from it. Positioning, voice and tone, look and feel, the competitive read, and what the brand will not do. Agents draft the competitive scans and keep the guidelines current; a human owns the taste calls — this is the one file you should not delegate outright.",
+    file: "/strategy.md",
+    sections: ["Positioning and the promise", "Voice and tone — human owned", "Look and feel, visual standards", "Competitive analysis and where you win", "What this brand will not do"],
+    metric: "Every node below is checked against this file before it ships."
+  },
+  analytics: {
+    kind: "Human + agent — scores both equations",
+    title: "Analytics",
+    body: "Sits at the bottom because it reads the whole system back. It tracks customers on one side and campaigns on the other, and answers one question: are you acquiring high-value customers who throw off strong free cash flow, or just volume? Agents build the cohorts, the dashboards and the anomaly flags; a human decides what the numbers mean and what Strategy should do about it.",
+    file: "/analytics.md",
+    sections: ["Metric definitions and data sources", "Cohort LTV and payback period", "Contribution margin and free cash flow by segment", "Channel attribution and its limits", "Weekly read: what moved, why, and what to change"],
+    metric: "Scores both equations and reports back up to Strategy."
+  },
+  customers: {
+    kind: "Human + agent",
+    title: "Ideal Customers",
+    body: "Who you are trying to get and keep. Humans define who counts as ideal; agents keep the segment definitions current against real behavior.",
+    file: "/customers/icp.md",
+    sections: ["Segment definitions", "Jobs to be done", "Disqualifiers", "LTV assumptions by segment"],
+    metric: "Equation 1 — Lifetime Value − Acquisition Cost = Post-Acquisition Value."
+  },
+  campaigns: {
+    kind: "Human + agent",
+    title: "Campaigns",
+    body: "The work that gets and keeps those customers. Humans set the bet and the budget; agents plan, draft, and report inside those bounds.",
+    file: "/campaigns/plan.md",
+    sections: ["Active bets and budget", "Channel mix", "Creative guardrails", "Reporting format"],
+    metric: "Equation 2 — Sessions × Conversion Rate × Average Order Value = Revenue."
+  },
+  acquisition: {
+    kind: "Agent-first — always reviewed",
+    title: "Acquisition",
+    body: "Finds and qualifies new demand against the ICP. An agent can carry most of it — the file says which segments to chase and what a lead is worth — but a human still reads the output. Nothing here runs unattended; the question is only how wide the leash is.",
+    file: "/customers/acquisition.md",
+    sections: ["Target segments in priority order", "Qualification rules", "Allowable acquisition cost", "Handoff to retention"],
+    metric: "Owns the Acquisition Cost term in Equation 1."
+  },
+  retention: {
+    kind: "Human + agent",
+    title: "Retention",
+    body: "Works the existing stock — lifecycle messaging, win-back, churn signals. Agents run the triggers and the reporting; a human decides what an offer says about the brand and how hard you are willing to discount.",
+    file: "/customers/retention.md",
+    sections: ["Lifecycle stages and triggers", "Churn signals to watch", "Offer library and limits — human sign-off", "Win-back rules"],
+    metric: "Owns the Lifetime Value term in Equation 1."
+  },
+  seo: {
+    kind: "Agent-first — always reviewed",
+    title: "SEO / GEO",
+    body: "Earns sessions from search and from answer engines. Mechanical enough that an agent does the volume, but a human sets the topic map and spot-checks whatever ships under the brand name.",
+    file: "/campaigns/seo-geo.md",
+    sections: ["Topic and query map", "Entity and brand facts to repeat", "Content standards", "Internal linking rules"],
+    metric: "Owns the Sessions term in Equation 2."
+  },
+  paid: {
+    kind: "Human + agent",
+    title: "Paid Ads",
+    body: "Agents handle structure, bidding, variant generation and reporting; humans still judge the creative brainstorm and the brand line.",
+    file: "/campaigns/paid-ads.md",
+    sections: ["Audiences and exclusions", "Budget and bid guardrails", "Creative brainstorm — human review", "Test log and results"],
+    metric: "Owns Sessions and Conversion Rate in Equation 2."
+  },
+  influencer: {
+    kind: "Human + agent",
+    title: "Influencer",
+    body: "Agents source and rank candidates, draft outreach, and track deliverables. A human picks who the brand is willing to stand next to and negotiates the relationship — taste and judgment, not throughput.",
+    file: "/campaigns/influencer.md",
+    sections: ["Fit criteria and no-go list — human call", "Sourcing and ranking method", "Offer structure and rates", "Disclosure and brand-safety rules"],
+    metric: "Feeds Sessions in Equation 2 and Lifetime Value in Equation 1."
+  },
+  owned: {
+    kind: "Human + agent",
+    title: "Owned Media",
+    body: "Email, site, social, community. Agents produce volume against the brief; a human owns the voice, the point of view, and what the brand refuses to say.",
+    file: "/campaigns/owned-media.md",
+    sections: ["Voice and point of view — human owned", "Editorial calendar", "Channel-by-channel format rules", "Repurposing rules"],
+    metric: "Compounds Sessions in Equation 2 at near-zero marginal cost."
+  },
+  loop: {
+    kind: "The whole system",
+    title: "The loop feeds itself",
+    body: "Nothing here is a funnel with an end. Campaigns get and keep customers; those customers fund the next campaign. Strengthen any node and the whole loop turns faster — weaken one and it stalls everywhere, which is why the two equations are checked on every campaign, not at the end of the quarter.",
+    file: "/README.md",
+    sections: ["How the loop is measured", "What a weakening loop looks like", "Review cadence", "Where the loop can break"],
+    metric: "Both equations, together, tell you whether the loop is gaining or losing."
+  },
+  open: {
+    kind: "Open slots — unstaffed",
+    title: "Your judgement goes here",
+    body: "Three shown, but there is no limit — add as many nodes as your loop actually needs. What is missing here: community, partnerships, pricing, CX, research, merchandising, support, lifecycle ops? Name each one, decide whether a human, an agent, or both should hold it, and argue why. Some of these are newly possible; some still are not. That argument is the assignment.",
+    file: "/open/<your-node>.md",
+    sections: ["What this node is accountable for", "Human, agent, or both — and why", "Which equation term it moves", "What would have to be true for an agent to own it outright"],
+    metric: "Defend it against the two equations, or cut it."
+  }
+};
+
+const STEPS = [
+  { key: "cmo", caption: "You are the CMO. You own the loop, not the tasks.", add: ["cmo"] },
+  { key: "strategy", caption: "Everything below is driven off your strategy.", add: ["wires", "strategy"] },
+  { key: "customers", caption: "The customers you are trying to get and keep.", add: ["customers", "eq1"] },
+  { key: "acquisition", caption: "Two functions do that work. First Acquisition — getting them.", add: ["acquisition"] },
+  { key: "retention", caption: "Then Retention — keeping them. Same customers, worked twice.", add: ["retention"] },
+  { key: "campaigns", caption: "The campaigns that get and keep them, measured on Equation 2.", add: ["campaigns", "eq2"] },
+  { key: "seo", caption: "Four channels, one at a time. First SEO / GEO — agent-first, but a human sets the topic map.", add: ["seo"] },
+  { key: "paid", caption: "Paid Ads — and go as deep as the work demands; this one alone could be twelve nodes.", add: ["paid"] },
+  { key: "influencer", caption: "Influencer — an agent sources and ranks; a human decides who the brand stands next to.", add: ["influencer"] },
+  { key: "owned", caption: "Owned Media — volume from agents, voice from a human. Nothing here runs unattended.", add: ["owned"] },
+  { key: "open", caption: "Additional agents: your judgement goes here — name them, staff them, defend them.", add: ["open"] },
+  { key: "analytics", caption: "Analytics reads the whole system back: are these customers worth having?", add: ["analytics"] },
+  { key: "loop", caption: "And the loop closes — those customers fund the next campaign.", add: ["loop"] }
+];
+
+const IDS = ["wires", "cmo", "strategy", "analytics", "customers", "eq1", "campaigns", "eq2", "acquisition", "retention", "seo", "paid", "influencer", "owned", "loop", "open"];
+
+class Component extends DCLogic {
+  state = { key: "cmo", step: 0, playing: false };
+
+  componentDidMount() { if (this.props.autoplay ?? true) this.start(); }
+  componentWillUnmount() { this.stop(); }
+
+  stop() {
+    if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    if (this.state.playing) this.setState({ playing: false });
+  }
+
+  start() {
+    if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    let n = 0;
+    const tick = () => {
+      n += 1;
+      if (n > STEPS.length) { this.stop(); return; }
+      this.setState({ step: n, key: STEPS[n - 1].key });
+    };
+    this.setState({ playing: true });
+    tick();
+    this.timer = setInterval(tick, 2600);
+  }
+
+  pick(key) {
+    return () => { this.stop(); this.setState({ key, step: 0 }); };
+  }
+
+  go(delta) {
+    return () => {
+      this.stop();
+      const next = Math.max(0, Math.min(STEPS.length, this.state.step + delta));
+      this.setState({ step: next, key: next === 0 ? this.state.key : STEPS[next - 1].key });
+    };
+  }
+
+  renderVals() {
+    const step = this.state.step;
+    const dim = {};
+    if (step === 0) {
+      IDS.forEach(id => { dim[id] = "opacity: 1; transition: opacity 400ms ease;" + (id === this.state.key ? " --sel: 2px solid #A41034;" : ""); });
+    } else {
+      const seen = new Set();
+      for (let i = 0; i < step - 1; i++) STEPS[i].add.forEach(id => seen.add(id));
+      const fresh = new Set(STEPS[step - 1].add);
+      IDS.forEach(id => {
+        const o = fresh.has(id) ? 1 : seen.has(id) ? 0.42 : 0.07;
+        dim[id] = "opacity: " + o + "; transition: opacity 400ms ease;" + (id === this.state.key ? " --sel: 2px solid #A41034;" : "");
+      });
+    }
+    if (step > 0 && STEPS[step - 1].key === "loop") {
+      dim.loop += " animation: loopFlash 1.4s ease-in-out 3;";
+    }
+    return {
+      sel: NODES[this.state.key],
+      stepCounter: step === 0 ? "Explore" : "Step " + step + " of " + STEPS.length,
+      stepCaption: step === 0 ? "Click any node to open its file." : STEPS[step - 1].caption,
+      nextLabel: step === 0 ? "Walk it step by step" : step === STEPS.length ? "Start over" : "Next",
+      onNext: step === STEPS.length ? () => { this.stop(); this.setState({ step: 1, key: STEPS[0].key }); } : this.go(1),
+      onPrev: this.go(-1),
+      onReset: () => { this.stop(); this.setState({ step: 0 }); },
+      onPlay: () => { if (this.state.playing) { this.stop(); } else { this.start(); } },
+      playLabel: this.state.playing ? "Pause" : "Play",
+      showEquations: this.props.showEquations ?? true,
+      showRepoStrip: this.props.showRepoStrip ?? true,
+      dWires: dim.wires, dCmo: dim.cmo, dStrategy: dim.strategy,
+      dCustomers: dim.customers, dEq1: dim.eq1, dCampaigns: dim.campaigns, dEq2: dim.eq2,
+      dAcquisition: dim.acquisition, dRetention: dim.retention,
+      dSeo: dim.seo, dPaid: dim.paid, dInfluencer: dim.influencer, dOwned: dim.owned,
+      dAnalytics: dim.analytics, dLoop: dim.loop, dOpen: dim.open,
+      onCmo: this.pick("cmo"),
+      onStrategy: this.pick("strategy"),
+      onAnalytics: this.pick("analytics"),
+      onCustomers: this.pick("customers"),
+      onCampaigns: this.pick("campaigns"),
+      onAcquisition: this.pick("acquisition"),
+      onRetention: this.pick("retention"),
+      onSeo: this.pick("seo"),
+      onPaid: this.pick("paid"),
+      onInfluencer: this.pick("influencer"),
+      onOwned: this.pick("owned"),
+      onOpen: this.pick("open")
+    };
+  }
+}
+</script>
+</body>
+</html>
