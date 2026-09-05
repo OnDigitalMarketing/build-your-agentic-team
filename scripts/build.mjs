@@ -122,6 +122,7 @@ for (const path of walk(ROOT)) {
 
   nodes[id] = {
     kind: data.kind ?? "",
+    mode: data.mode ?? "",
     title: data.title ?? id,
     body: data.summary ?? "",
     file: rel,
