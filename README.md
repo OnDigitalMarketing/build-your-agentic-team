@@ -22,7 +22,7 @@ summary: >-
 Every file names a human, an agent, or both. Every node moves a term in one of
 two equations. Strategy is a reviewed commit, not a slide.
 
-📊 **[Open the interactive diagram →](https://BznJC.github.io/build-your-agentic-team/)**
+📊 **[Open the interactive diagram →](https://ondigitalmarketing.github.io/build-your-agentic-team/)**
 
 ---
 
